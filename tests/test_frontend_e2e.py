@@ -205,9 +205,19 @@ def _install_axe(page: Page) -> None:
 
 def _assert_no_accessibility_violations(page: Page, state: str) -> None:
     results = page.evaluate(
-        """async () => await globalThis.axe.run(document, {
-            resultTypes: ["violations"],
-        })"""
+        """async () => {
+            await document.fonts.ready;
+            const finiteAnimations = document.getAnimations().filter(animation =>
+                animation.playState === 'running'
+                && Number.isFinite(animation.effect.getComputedTiming().endTime)
+            );
+            await Promise.all(finiteAnimations.map(animation =>
+                animation.finished.catch(() => {})
+            ));
+            return await globalThis.axe.run(document, {
+                resultTypes: ["violations"],
+            });
+        }"""
     )
     violations = results["violations"]
     report = [
@@ -227,6 +237,37 @@ def _assert_no_accessibility_violations(page: Page, state: str) -> None:
     ]
     formatted_report = json.dumps(report, ensure_ascii=False, indent=2)
     assert not violations, f"axe-core violations in {state}:\n{formatted_report}"
+
+
+def test_accessibility_audit_waits_for_finite_animation(
+    chromium_browser: Browser,
+    running_console: RunningConsole,
+) -> None:
+    context = chromium_browser.new_context(
+        viewport={"width": 1366, "height": 900},
+        bypass_csp=True,
+    )
+    page = context.new_page()
+    try:
+        _open_console(page, running_console)
+        _install_axe(page)
+        page.locator("#view-overview .hero-panel").evaluate(
+            """element => {
+              const animation = element.animate([{opacity: 0.08}, {opacity: 1}], {
+                duration: 2000, fill: 'forwards', easing: 'linear',
+              });
+              const run = globalThis.axe.run.bind(globalThis.axe);
+              globalThis.axe.run = async (...args) => {
+                if (animation.playState !== 'finished') {
+                  throw new Error('Accessibility audit sampled an unfinished animation');
+                }
+                return run(...args);
+              };
+            }"""
+        )
+        _assert_no_accessibility_violations(page, "animated overview")
+    finally:
+        context.close()
 
 
 def test_console_reports_configured_authoritative_storage(

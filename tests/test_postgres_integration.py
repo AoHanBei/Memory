@@ -1111,7 +1111,12 @@ def test_bitemporal_migration_downgrades_and_backfills_existing_rows(
 ) -> None:
     scope = Scope("tenant-migration", "alice")
     context = ContextSignature.from_mapping({"channel": "assistant"})
-    clock = FixedClock()
+    conninfo = postgres_url.replace("postgresql+psycopg://", "postgresql://", 1)
+    with psycopg.connect(conninfo) as connection:
+        database_now = connection.execute("SELECT CURRENT_TIMESTAMP").fetchone()
+    assert database_now is not None
+    # Keep the scheduled outcome in the future relative to the migration clock.
+    clock = FixedClock(current=database_now[0])
     store = PostgresMemoryStore(postgres_url, min_size=1, max_size=2)
     app = MemoryApplication(store=store, clock=clock, ids=SequentialIds())
     legacy_policy_id = app.retrieval_policy.id
@@ -1153,7 +1158,6 @@ def test_bitemporal_migration_downgrades_and_backfills_existing_rows(
     config = alembic_config(postgres_url)
     alembic_command.downgrade(config, "0002_scope_integrity")
     try:
-        conninfo = postgres_url.replace("postgresql+psycopg://", "postgresql://", 1)
         with psycopg.connect(conninfo) as connection:
             columns = {
                 row[0]
