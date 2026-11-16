@@ -1,0 +1,77 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="1020" viewBox="0 0 1600 1020" role="img" aria-labelledby="title desc">
+<title id="title">Memory: evidence, revisions, recall and attributable outcomes</title>
+<desc id="desc">Five mechanisms connect input evidence to immutable revisions, time-bounded recall traces, attributed outcomes and bounded policy updates. PostgreSQL is authoritative; Milvus is rebuildable. Outcome and strategy operations are explicit, separate feedback steps.</desc>
+<defs><marker id="arrow" markerWidth="10" markerHeight="10" refX="8" refY="5" orient="auto"><path d="M1 1 L8 5 L1 9" fill="none" stroke="#226852" stroke-width="1.8"/></marker>
+<style>.title{font:700 52px 'Segoe UI',sans-serif;fill:#fff}.sub{font:400 23px 'Segoe UI',sans-serif;fill:#b9d4c8}.label{font:700 18px 'Consolas',monospace;letter-spacing:1.5px;fill:#226852}.h{font:650 27px 'Segoe UI',sans-serif;fill:#173e32}.body{font:400 22px 'Segoe UI',sans-serif;fill:#466154}.small{font:400 20px 'Segoe UI',sans-serif;fill:#466154}.mono{font:400 20px 'Consolas',monospace;fill:#226852}.light{fill:#c4ddd3}</style></defs>
+<rect width="1600" height="1020" fill="#f5f5ef"/>
+<rect width="1600" height="145" fill="#143e31"/>
+<rect x="56" y="40" width="5" height="63" fill="#a6c99e"/>
+<text x="82" y="80" class="title">Memory</text>
+<text x="82" y="116" class="sub">Evidence in. Revisions preserved. Outcomes attributed.</text>
+<text x="1220" y="73" class="label light">PYTHON / FASTAPI</text>
+<text x="1220" y="108" class="small light">USER MEMORY SERVICE</text>
+<rect x="56" y="210" width="280" height="300" rx="5" fill="#fff" stroke="#ccd9cf" stroke-width="1.5"/>
+<rect x="56" y="210" width="280" height="5" fill="#226852"/>
+<text x="74" y="254" class="label">01 / EVIDENCE</text>
+<text x="74" y="300" class="h">Keep the source</text>
+<text x="74" y="352" class="small">Observation + evidence</text>
+<text x="74" y="390" class="small">Tenant / subject scope</text>
+<text x="74" y="428" class="small">Idempotent writes</text>
+<text x="74" y="478" class="mono">Input facts</text>
+<rect x="358" y="210" width="280" height="300" rx="5" fill="#fff" stroke="#ccd9cf" stroke-width="1.5"/>
+<rect x="358" y="210" width="280" height="5" fill="#226852"/>
+<text x="376" y="254" class="label">02 / BELIEF</text>
+<text x="376" y="300" class="h">Append revisions</text>
+<text x="376" y="352" class="small">Stable record identity</text>
+<text x="376" y="390" class="small">Immutable version chain</text>
+<text x="376" y="428" class="small">Business + recorded time</text>
+<text x="376" y="478" class="mono">Belief state</text>
+<rect x="660" y="210" width="280" height="300" rx="5" fill="#fff" stroke="#ccd9cf" stroke-width="1.5"/>
+<rect x="660" y="210" width="280" height="5" fill="#226852"/>
+<text x="678" y="254" class="label">03 / RECALL</text>
+<text x="678" y="300" class="h">Freeze a Trace</text>
+<text x="678" y="352" class="small">Time-bounded visibility</text>
+<text x="678" y="390" class="small">Score + policy snapshot</text>
+<text x="678" y="428" class="small">Belief / utility unchanged</text>
+<text x="678" y="478" class="mono">Trace is appended</text>
+<rect x="962" y="210" width="280" height="300" rx="5" fill="#fff" stroke="#ccd9cf" stroke-width="1.5"/>
+<rect x="962" y="210" width="280" height="5" fill="#b96b31"/>
+<text x="980" y="254" class="label">04 / OUTCOME</text>
+<text x="980" y="300" class="h">Attribute results</text>
+<text x="980" y="352" class="small">Trace + revision match</text>
+<text x="980" y="390" class="small">Outcome idempotency</text>
+<text x="980" y="428" class="small">Contextual utility update</text>
+<text x="980" y="478" class="mono">Explicit feedback</text>
+<rect x="1264" y="210" width="280" height="300" rx="5" fill="#fff" stroke="#ccd9cf" stroke-width="1.5"/>
+<rect x="1264" y="210" width="280" height="5" fill="#b96b31"/>
+<text x="1282" y="254" class="label">05 / STRATEGY</text>
+<text x="1282" y="300" class="h">Bound the change</text>
+<text x="1282" y="352" class="small">Immutable policy snapshot</text>
+<text x="1282" y="390" class="small">Gated experiment stages</text>
+<text x="1282" y="428" class="small">Atomic activate / rollback</text>
+<text x="1282" y="478" class="mono">Internal orchestration</text>
+<path d="M339 357 H354" stroke="#226852" fill="none" stroke-width="2.4" marker-end="url(#arrow)"/>
+<path d="M641 357 H656" stroke="#226852" fill="none" stroke-width="2.4" marker-end="url(#arrow)"/>
+<path d="M943 357 H958" stroke="#226852" fill="none" stroke-width="2.4" stroke-dasharray="4 4" marker-end="url(#arrow)"/>
+<path d="M1245 357 H1260" stroke="#226852" fill="none" stroke-width="2.4" stroke-dasharray="4 4" marker-end="url(#arrow)"/>
+<text x="56" y="185" class="label">REQUEST AND FEEDBACK OPERATIONS</text>
+<text x="968" y="552" class="small">Feedback and strategy changes are separate operations.</text>
+<rect x="56" y="602" width="864" height="250" rx="5" fill="#fff" stroke="#ccd9cf" stroke-width="1.5"/>
+<rect x="56" y="602" width="864" height="51" fill="#e6eee4"/>
+<text x="78" y="637" class="label">POSTGRESQL / AUTHORITATIVE STATE</text>
+<text x="80" y="697" class="body">Evidence · Revisions · Traces · Outcomes · Strategies</text>
+<text x="80" y="741" class="body">Write transaction → outbox → leased projection worker</text>
+<text x="80" y="784" class="small">Append-only records + Scope checks + audit boundaries</text>
+<text x="80" y="824" class="small">Worker: retry · dead letter · cursor · rebuild · deletion fence</text>
+<rect x="968" y="602" width="576" height="250" rx="5" fill="#fff" stroke="#ccd9cf" stroke-width="1.5"/>
+<rect x="968" y="602" width="576" height="51" fill="#e6eee4"/>
+<text x="990" y="637" class="label">MILVUS / REBUILDABLE PROJECTION</text>
+<text x="990" y="697" class="body">Hashed Scope + revision IDs + vectors</text>
+<text x="990" y="741" class="body">Candidates rechecked against authority</text>
+<text x="990" y="784" class="small">Default: deterministic hash embedding, 384D</text>
+<text x="990" y="824" class="small">Degrade to lexical recall when permitted</text>
+<path d="M920 725 H958" stroke="#226852" stroke-width="2.5" marker-end="url(#arrow)"/>
+<rect x="56" y="888" width="1488" height="64" rx="5" fill="#edf1e5" stroke="#ccd9cf" stroke-width="1.5"/>
+<text x="78" y="928" class="mono">CONTEXT PROJECTION: deterministic extraction + exact deduplication + character budget</text>
+<text x="56" y="990" class="small">Policy stages are implemented; live shadow/canary traffic orchestration remains planned.</text>
+</svg>

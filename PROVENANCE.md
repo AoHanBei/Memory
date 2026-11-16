@@ -1,23 +1,25 @@
-# Provenance and Design Lineage
+# 项目背景与开发方式
 
-This repository is a new Python implementation authored for the same project owner. Its design lineage is explicitly acknowledged.
+[Memory](https://github.com/AoHanBei/Memory) 是由
+[AoHanBei](https://github.com/AoHanBei) 维护的个人 AI 应用记忆项目，重点实践证据归因、
+不可变修订、双时间召回、结果效用学习和受控策略更新。
 
-The conceptual starting point is the analysis and redesign work in:
+## 设计与实现
 
-- `independent-user-memory/docs/design-thinking-and-redesign.md`
-- `independent-user-memory/docs/evolvable-memory-architecture.md`
+项目将 Evidence、Belief、Experience、Projection 和 Evolution 分开建模。
+PostgreSQL 保存权威状态，Milvus 提供可重建的检索投影；领域层保持纯 Python，
+API 与基础设施通过 application 端口连接。设计取舍和具体实现见
+[架构说明](docs/architecture.md)与[领域边界决策](docs/adr/0001-layer-and-plane-boundaries.md)。
 
-Those documents describe evidence-grounded memory, immutable revisions, bitemporal reasoning, recall traces, outcome attribution, contextual utility, and guarded policy evolution. This repository turns those ideas into a Python-native architecture.
+开发参考相关开源项目的思路，并使用 AI 辅助实现。代码大部分由 AI 辅助生成，
+维护者负责问题定义、设计取舍、验收标准、测试与 diff 审查。
+项目能力以当前源码为依据，验证结论对应具体测试、数据集和运行记录。
 
-Implementation rules:
+## 维护与许可
 
-1. No Java source tree, class hierarchy, persistence entity, controller, or mapper is mechanically translated.
-2. Python domain concepts are modeled from behavior and invariants, not one-to-one class correspondence.
-3. Design concepts and their lineage remain documented instead of being represented as unrelated clean-room work.
-4. Third-party code must be attributed and licensed independently before inclusion.
+项目仓库、问题反馈和安全报告由 AoHanBei 维护。项目采用
+AGPL-3.0-only，许可证全文见 [LICENSE](LICENSE)。
 
-The repository uses AGPL-3.0-only, consistent with the originating project. This file documents provenance; it is not a substitute for the license terms.
-
-Test-only third-party dependency:
-
-- `axe-core` 4.11.4, maintained by Deque Systems and distributed under MPL-2.0, is exact-pinned through `package-lock.json` for local Chromium accessibility audits. It is installed into ignored `node_modules/`, is not copied into the application image or Python distribution, and does not become a runtime frontend dependency.
+测试工具使用 Deque Systems 维护的 `axe-core`，通过 `package-lock.json` 锁定为
+4.11.4，采用 MPL-2.0。它用于本地 Chromium 无障碍审计，安装在忽略的
+`node_modules/` 中，不作为运行时前端依赖，也不复制进应用镜像或 Python 发行包。

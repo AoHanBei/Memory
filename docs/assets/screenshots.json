@@ -1,0 +1,12 @@
+{
+  "baseRevision": "5c5169b305b4c81c288885a85e681fd94b188ef8",
+  "dataKind": "synthetic-preferences",
+  "backend": "temporary-in-memory-api",
+  "source": "src/evolvable_memory/api/static",
+  "capture": "examples/capture_docs.py",
+  "browser": "157.0.8103.51",
+  "files": [
+    "memory-recall.png",
+    "memory-revisions.png"
+  ]
+}

@@ -9,7 +9,7 @@ description = "Evidence-grounded, outcome-aware, evolvable memory service for AI
 readme = "README.md"
 requires-python = ">=3.12"
 license = { text = "AGPL-3.0-only" }
-authors = [{ name = "tiammomo" }]
+authors = [{ name = "AoHanBei" }]
 keywords = ["ai", "memory", "agent", "retrieval", "personalization"]
 classifiers = [
     "Development Status :: 2 - Pre-Alpha",
@@ -40,6 +40,12 @@ dev = [
     "pytest-cov>=6,<8",
     "ruff>=0.11,<1",
 ]
+
+[project.urls]
+Homepage = "https://github.com/AoHanBei/Memory"
+Repository = "https://github.com/AoHanBei/Memory"
+Issues = "https://github.com/AoHanBei/Memory/issues"
+Documentation = "https://github.com/AoHanBei/Memory/blob/main/docs/index.md"
 
 [project.scripts]
 evolvable-memory = "evolvable_memory.main:run"

@@ -483,7 +483,10 @@ def test_topbar_actions_stay_inside_the_viewport_without_overlap(
         status = page.locator("#scope-status")
 
         expect(guide).to_have_accessible_name("新手引导")
-        expect(scope).to_have_accessible_name("当前作用域 demo / alice，点击切换")
+        # Chinese punctuation is part of the accessible label.
+        expect(scope).to_have_accessible_name(
+            "当前作用域 demo / alice，点击切换"  # noqa: RUF001
+        )
         topbar_box = topbar.bounding_box()
         actions_box = actions.bounding_box()
         guide_box = guide.bounding_box()

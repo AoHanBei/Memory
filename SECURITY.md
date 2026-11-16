@@ -5,7 +5,7 @@
 Evolvable User Memory `0.1.x` 是开发预览版，不是生产就绪服务。当前版本：
 
 - 提供进程内存与 PostgreSQL 权威存储、版本化迁移和数据库 Scope/幂等/修订/归因约束，但仍处于本机开发验证阶段；
-- PostgreSQL 会为 Observation 摄入、Revision 变更和 Outcome 记录在同一事务追加不含原始证据正文的 outbox 事件，但尚无消费者、发布确认、受控重放或投影；
+- PostgreSQL 会为 Observation 摄入、Revision 变更和 Outcome 记录在同一事务追加不含原始证据正文的 outbox 事件；Milvus 专用 worker 已支持租约消费、重试、死信、游标、重建与删除屏障；通用事件发布和远程受控重放接口仍待实现；
 - 提供 `/livez` 与会检查当前存储的 `/readyz`，前端也会动态展示存储并隔离 Scope 切换后的旧响应；
 - 提供本地开发身份与 JWT 身份适配器，并在 application 边界按 action、tenant、subject 和 purpose 默认拒绝授权；开发身份只允许 `development/test`，其他环境配置时拒绝启动；
 - 对每次 allow/deny 记录不含正文和 Scope 原值的 HMAC 伪名化授权审计，但尚无独立防篡改审计存储、角色管理 API、撤销/临时授权或数据库 RLS；
@@ -23,7 +23,7 @@ Evolvable User Memory `0.1.x` 是开发预览版，不是生产就绪服务。�
 ## 私密报告漏洞
 
 请优先使用 GitHub 仓库的
-[Private vulnerability reporting](https://github.com/tiammomo/evolvable-user-memory/security/advisories/new)
+[Private vulnerability reporting](https://github.com/AoHanBei/Memory/security/advisories/new)
 提交安全报告。报告应尽量包含：
 
 1. 受影响版本、提交或部署方式；
@@ -54,7 +54,7 @@ Evolvable User Memory `0.1.x` 是开发预览版，不是生产就绪服务。�
 
 - IdP 成员/角色治理、token 撤销与轮换、增强认证、数据库 RLS 和独立审计存储；
 - 数据库最小权限、迁移门禁、并发/故障验证、备份恢复与灾难恢复演练；
-- outbox 幂等消费者、发布重放控制、投影隔离与游标恢复；
+- 在现有 Milvus 专用消费者、投影隔离和游标恢复之上，补充通用事件发布、授权运维重放接口和积压告警；
 - TLS、秘密管理、受限网络和最小权限运行；
 - 依赖与镜像扫描、审计访问治理、监控、告警和可验证 SLO；
 - 处理依据审批、自动保留、备份/导出副本清理与恢复后屏障重放。
